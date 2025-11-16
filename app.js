@@ -1,70 +1,118 @@
- const button = document.querySelector("#calculate");
-      const after = document.getElementById("after");
-      const additional = document.getElementById("additional");
-      const returnRate = document.getElementById("return-rate");
-      const startingAmount = document.getElementById("starting-amount");
-      const endBalance = document.getElementById("endBalance");
-      const startBalance = document.getElementById("startBalance");
-      const totalContrib = document.getElementById("totalContrib");
-      const totalInterest = document.getElementById("totalInterest");
-      const table = document.querySelector(".accumulation-schedule");
-      const langSelect = document.getElementById("lang");
+document.getElementById("calculate").addEventListener("click", () => {
+  const after = document.getElementById("after").value;
+  const add = +document.getElementById("additional").value;
+  const rate = document.getElementById("return-rate").value;
+  const start = +document.getElementById("starting-amount").value;
 
-      const hisobla = () => {
-        if (
-          after.value &&
-          additional.value &&
-          returnRate.value &&
-          startingAmount.value
-        ) {
-          table.style.display = "block";
+  if (!after || !add || !rate || !start) return alert("Заполните все поля!");
 
-          const months = after.value * 12;
-          const monthlyRate = returnRate.value / 12;
-          const add = +additional.value;
-          const start = +startingAmount.value;
-          let balance = start;
-          let totalAdd = 0;
-          let totalProfit = 0;
+  const months = after * 12;
+  const monthlyRate = rate / 12;
+  let balance = start;
+  let totalAdd = 0;
+  let totalProfit = 0;
 
-          const tbody = document.querySelector(".accumulation-schedule tbody");
-          tbody.innerHTML = "";
+  const tbody = document.querySelector(".accumulation-schedule tbody");
+  tbody.innerHTML = "";
 
-          for (let i = 1; i <= months; i++) {
-            const profit = (balance * monthlyRate) / 100;
-            totalProfit += profit;
-            balance += profit + add;
-            totalAdd += add;
-            tbody.innerHTML += `
-              <tr>
-                <td>${i}</td>
-                <td>${add.toFixed(2)} $</td>
-                <td>${profit.toFixed(2)} $</td>
-                <td>${balance.toFixed(2)} $</td>
-              </tr>`;
-          }
+  for (let i = 1; i <= months; i++) {
+    const profit = (balance * monthlyRate) / 100;
+    totalProfit += profit;
+    balance += profit + add;
+    totalAdd += add;
 
-          endBalance.textContent = balance.toFixed(2) + " $";
-          startBalance.textContent = start.toFixed(2) + " $";
-          totalContrib.textContent = totalAdd.toFixed(2) + " $";
-          totalInterest.textContent = totalProfit.toFixed(2) + " $";
-        } else {
-          alert("Пожалуйста, заполните все поля!");
-        }
+    tbody.innerHTML += `
+      <tr>
+        <td>${i}</td>
+        <td>${add.toFixed(2)} $</td>
+        <td>${profit.toFixed(2)} $</td>
+        <td>${balance.toFixed(2)} $</td>
+      </tr>
+    `;
+  }
+
+  document.getElementById("endBalance").textContent = balance.toFixed(2) + " $";
+  document.getElementById("startBalance").textContent = start.toFixed(2) + " $";
+  document.getElementById("totalContrib").textContent = totalAdd.toFixed(2) + " $";
+  document.getElementById("totalInterest").textContent = totalProfit.toFixed(2) + " $";
+
+  document.querySelector(".accumulation-schedule").style.display = "block";
+});
+
+// ==== ПЕРЕКЛЮЧЕНИЕ ТЁМНОЙ ТЕМЫ ====
+const toggleBtn = document.getElementById("themeToggle");
+
+toggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  toggleBtn.textContent = document.body.classList.contains("dark")
+    ? "☀️ Light"
+    : "🌙 Dark";
+
+  localStorage.setItem("theme", document.body.classList.contains("dark"));
+});
+
+// Загружаем тему
+if (localStorage.getItem("theme") === "true") {
+  document.body.classList.add("dark");
+  toggleBtn.textContent = "☀️ Light";
+}
+
+// ==== НАВИГАЦИЯ ====
+function openPage(page) {
+  document.querySelectorAll(".calculator").forEach(el => el.style.display = "none");
+  document.getElementById(page).style.display = "block";
+}
+
+
+
+
+
+
+
+
+
+const display = document.getElementById('display');
+
+    function appendValue(value) {
+      display.value += value;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function fact(n) {
+      n = Math.floor(n);
+      if(n <= 1) return 1;
+      return n * fact(n - 1);
+    }
+
+    function calculateResult() {
+      try {
+        let expression = display.value.replace(/%/g, '/100');
+        let result = eval(expression);
+        display.value = result;
+      } catch (e) {
+        display.value = 'Ошибка';
+      }
+    }
+
+    function convertCurrency() {
+      const rates = {
+        USD: 1,
+        EUR: 1.1,
+        UZS: 12000
       };
-      button.addEventListener("click", hisobla);
+      let amount = parseFloat(document.getElementById('currencyAmount').value);
+      let from = document.getElementById('currencyFrom').value;
+      let to = document.getElementById('currencyTo').value;
 
-      const changeLanguage = (lang) => {
-        document.querySelectorAll("[data-ru]").forEach((el) => {
-          el.textContent = el.getAttribute(`data-${lang}`);
-        });
-        localStorage.setItem("lang", lang);
-      };
+      if(isNaN(amount)) {
+        document.getElementById('currencyResult').innerText = 'Введите сумму';
+        return;
+      }
 
-      langSelect.addEventListener("change", () => {
-        changeLanguage(langSelect.value);
-      });
-
-      const savedLang = localStorage.getItem("lang") || "ru";
-      langSelect.value = savedLang;
-      changeLanguage(savedLang);
+      let converted = (amount / rates[from]) * rates[to];
+      document.getElementById('currencyResult').innerText = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+    }
