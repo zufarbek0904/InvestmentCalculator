@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Инвестиционный калькулятор</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">Hisobla.uz</div>
+        <nav>
+          <ul>
+            <li><a href="#">Финансы</a></li>
+            <li><a href="#">Здоровье</a></li>
+            <li><a href="#">Математика</a></li>
+            <li><a href="#">Другое</a></li>
+          </ul>
+        </nav>
+        <div class="lang-switch">
+          <label for="lang">🌐</label>
+          <select id="lang">
+            <option value="ru">Рус</option>
+            <option value="uz">Uzb</option>
+            <option value="en">Eng</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="calculator">
+        <h1
+          data-ru="Инвестиционный калькулятор"
+          data-uz="Investitsiya kalkulyatori"
+          data-en="Investment Calculator"
+        >
+          Инвестиционный калькулятор
+        </h1>
+        <p
+          data-ru="Этот калькулятор поможет рассчитать ваш доход от инвестиций."
+          data-uz="Bu kalkulyator investitsiya daromadingizni hisoblashga yordam beradi."
+          data-en="This calculator helps you calculate your investment income."
+        >
+          Этот калькулятор поможет рассчитать ваш доход от инвестиций.
+        </p>
+
+        <div class="calculator-form">
+          <label
+            data-ru="Начальная сумма"
+            data-uz="Boshlang‘ich summa"
+            data-en="Starting amount"
+            >Начальная сумма</label
+          >
+          <input type="number" id="starting-amount" placeholder="$" />
+
+          <label
+            data-ru="Срок (в годах)"
+            data-uz="Davomiylik (yil)"
+            data-en="Duration (years)"
+            >Срок (в годах)</label
+          >
+          <input type="number" id="after" placeholder="лет" />
+
+          <label
+            data-ru="Годовая процентная ставка"
+            data-uz="Yillik foiz stavkasi"
+            data-en="Annual interest rate"
+            >Годовая процентная ставка</label
+          >
+          <input type="number" id="return-rate" placeholder="%" />
+
+          <label
+            data-ru="Период начисления процентов"
+            data-uz="Foiz hisoblash davri"
+            data-en="Compounding period"
+            >Период начисления процентов</label
+          >
+          <select id="compound">
+            <option value="год">год</option>
+          </select>
+
+          <label
+            data-ru="Ежемесячный взнос"
+            data-uz="Qo‘shimcha badal"
+            data-en="Monthly contribution"
+            >Ежемесячный взнос</label
+          >
+          <input type="number" id="additional" placeholder="$" />
+
+          <button
+            id="calculate"
+            data-ru="Рассчитать"
+            data-uz="Hisoblash"
+            data-en="Calculate"
+          >
+            Рассчитать
+          </button>
+        </div>
+
+        <div class="results">
+          <h2 data-ru="Результаты" data-uz="Natijalar" data-en="Results">
+            Результаты
+          </h2>
+          <p>
+            <strong>Итоговая сумма:</strong> <span id="endBalance">0 $</span>
+          </p>
+          <p>
+            <strong>Начальная сумма:</strong> <span id="startBalance">0 $</span>
+          </p>
+          <p>
+            <strong>Всего вложено:</strong> <span id="totalContrib">0 $</span>
+          </p>
+          <p><strong>Доход:</strong> <span id="totalInterest">0 $</span></p>
+        </div>
+
+        <div class="accumulation-schedule" style="display: none">
+          <h2
+            data-ru="Таблица расчетов"
+            data-uz="Hisob jadvali"
+            data-en="Calculation table"
+          >
+            Таблица расчетов
+          </h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Месяц</th>
+                <th>Взнос</th>
+                <th>Проценты</th>
+                <th>Баланс</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <h2>Финансовые калькуляторы</h2>
+        <ul>
+          <li>Ипотека</li>
+          <li>Кредит</li>
+          <li>Автокредит</li>
+          <li>Платеж</li>
+          <li>Инвестиции</li>
+          <li>Налог</li>
+          <li>Прибыль</li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>© Все права защищены — Hisobla.uz</footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
