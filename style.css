@@ -70,7 +70,9 @@ main {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input, select, button {
+input,
+select,
+button {
   padding: 8px;
   font-size: 16px;
   border-radius: 6px;
@@ -105,7 +107,8 @@ button#calculate:hover {
   border-collapse: collapse;
 }
 
-.accumulation-schedule th, .accumulation-schedule td {
+.accumulation-schedule th,
+.accumulation-schedule td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: center;
@@ -147,7 +150,7 @@ button#calculate:hover {
 .dark .sidebar {
   background: #161b22;
   color: #e6edf3;
-  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .dark input,
@@ -275,16 +278,15 @@ button#calculate:hover {
   }
 }
 
-
 .calculator {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 100%;
-    }
-    /* input, select {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+/* input, select {
       width: 100%;
       padding: 10px;
       font-size: 1.2em;
@@ -292,19 +294,19 @@ button#calculate:hover {
       border-radius: 5px;
       border: 1px solid #ccc;
     } */
-    .buttons button {
-      padding: 15px;
-      font-size: 1em;
-      margin: 5px;
-      width: 60px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .buttons button:hover {
-      background: #ddd;
-    }
-    .wide {
-      width: 130px;
-    }
+.buttons button {
+  padding: 15px;
+  font-size: 1em;
+  margin: 5px;
+  width: 60px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.buttons button:hover {
+  background: #ddd;
+}
+.wide {
+  width: 130px;
+}

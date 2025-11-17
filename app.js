@@ -33,8 +33,10 @@ document.getElementById("calculate").addEventListener("click", () => {
 
   document.getElementById("endBalance").textContent = balance.toFixed(2) + " $";
   document.getElementById("startBalance").textContent = start.toFixed(2) + " $";
-  document.getElementById("totalContrib").textContent = totalAdd.toFixed(2) + " $";
-  document.getElementById("totalInterest").textContent = totalProfit.toFixed(2) + " $";
+  document.getElementById("totalContrib").textContent =
+    totalAdd.toFixed(2) + " $";
+  document.getElementById("totalInterest").textContent =
+    totalProfit.toFixed(2) + " $";
 
   document.querySelector(".accumulation-schedule").style.display = "block";
 });
@@ -60,59 +62,55 @@ if (localStorage.getItem("theme") === "true") {
 
 // ==== НАВИГАЦИЯ ====
 function openPage(page) {
-  document.querySelectorAll(".calculator").forEach(el => el.style.display = "none");
+  document
+    .querySelectorAll(".calculator")
+    .forEach((el) => (el.style.display = "none"));
   document.getElementById(page).style.display = "block";
 }
 
+const display = document.getElementById("display");
 
+function appendValue(value) {
+  display.value += value;
+}
 
+function clearDisplay() {
+  display.value = "";
+}
 
+function fact(n) {
+  n = Math.floor(n);
+  if (n <= 1) return 1;
+  return n * fact(n - 1);
+}
 
+function calculateResult() {
+  try {
+    let expression = display.value.replace(/%/g, "/100");
+    let result = eval(expression);
+    display.value = result;
+  } catch (e) {
+    display.value = "Ошибка";
+  }
+}
 
+function convertCurrency() {
+  const rates = {
+    USD: 1,
+    EUR: 1.1,
+    UZS: 12000,
+  };
+  let amount = parseFloat(document.getElementById("currencyAmount").value);
+  let from = document.getElementById("currencyFrom").value;
+  let to = document.getElementById("currencyTo").value;
 
+  if (isNaN(amount)) {
+    document.getElementById("currencyResult").innerText = "Введите сумму";
+    return;
+  }
 
-
-const display = document.getElementById('display');
-
-    function appendValue(value) {
-      display.value += value;
-    }
-
-    function clearDisplay() {
-      display.value = '';
-    }
-
-    function fact(n) {
-      n = Math.floor(n);
-      if(n <= 1) return 1;
-      return n * fact(n - 1);
-    }
-
-    function calculateResult() {
-      try {
-        let expression = display.value.replace(/%/g, '/100');
-        let result = eval(expression);
-        display.value = result;
-      } catch (e) {
-        display.value = 'Ошибка';
-      }
-    }
-
-    function convertCurrency() {
-      const rates = {
-        USD: 1,
-        EUR: 1.1,
-        UZS: 12000
-      };
-      let amount = parseFloat(document.getElementById('currencyAmount').value);
-      let from = document.getElementById('currencyFrom').value;
-      let to = document.getElementById('currencyTo').value;
-
-      if(isNaN(amount)) {
-        document.getElementById('currencyResult').innerText = 'Введите сумму';
-        return;
-      }
-
-      let converted = (amount / rates[from]) * rates[to];
-      document.getElementById('currencyResult').innerText = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
-    }
+  let converted = (amount / rates[from]) * rates[to];
+  document.getElementById(
+    "currencyResult"
+  ).innerText = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+}
